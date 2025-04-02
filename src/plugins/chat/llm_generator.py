@@ -62,7 +62,7 @@ class ResponseGenerator:
 
         if model_response:
             logger.info(f"{global_config.BOT_NICKNAME}的回复是：{model_response}")
-            model_response = await self._process_response(model_response)
+            model_response = await self._process_response(model_response, message.processed_plain_text.startswith('/help'))
             if model_response:
                 return model_response, raw_content
         return None, raw_content
@@ -193,10 +193,13 @@ class ResponseGenerator:
             print(f"获取情感标签时出错: {e}")
             return "neutrality", "neutral"  # 出错时返回默认值
 
-    async def _process_response(self, content: str) -> Tuple[List[str], List[str]]:
+    async def _process_response(self, content: str, isHelp: bool = False) -> Tuple[List[str], List[str]]:
         """处理响应内容，返回处理后的内容和情感标签"""
         if not content:
             return None, []
+            
+        if isHelp:
+            return [content]
 
         processed_response = process_llm_response(content)
 

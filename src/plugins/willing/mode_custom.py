@@ -46,10 +46,10 @@ class WillingManager:
         elif topic:
             current_willing += 0.05
 
-        if is_mentioned_bot and current_willing < 1.0:
-            current_willing += 0.9
-        elif is_mentioned_bot:
-            current_willing += 0.05
+        # if is_mentioned_bot and current_willing < 1.0:
+        #     current_willing += 0.9
+        # elif is_mentioned_bot:
+        #     current_willing += 0.05
 
         if is_emoji:
             current_willing *= 0.2
@@ -67,8 +67,14 @@ class WillingManager:
             if chat_stream.group_info.group_id in config.talk_frequency_down_groups:
                 reply_probability = reply_probability / config.down_frequency_rate
 
-            if is_mentioned_bot and sender_id == "1026294844":
-                reply_probability = 1
+            if sender_id in config.must_qq:
+                reply_probability = 0.8
+    
+        if is_emoji: # 不对表情包回复
+            reply_probability = 0
+
+        if not chat_stream.group_info: # 私聊必回
+            reply_probability = 1
 
         return reply_probability
 

@@ -230,6 +230,7 @@ class EmojiManager:
             ]
 
             for filename in files_to_process:
+                #logger.info(f"[扫描] 文件名: {filename}")
                 image_path = os.path.join(emoji_dir, filename)
 
                 # 获取图片的base64编码和哈希值

@@ -46,7 +46,9 @@ class BotConfig:
     EMOJI_CHECK_PROMPT: str = "符合公序良俗"  # 表情包过滤要求
 
     ban_words = set()
+    ban_qq = set()
     ban_msgs_regex = set()
+    must_qq = set()
 
     max_response_length: int = 1024  # 最大回复长度
 
@@ -286,6 +288,8 @@ class BotConfig:
             config.MAX_CONTEXT_SIZE = msg_config.get("max_context_size", config.MAX_CONTEXT_SIZE)
             config.emoji_chance = msg_config.get("emoji_chance", config.emoji_chance)
             config.ban_words = msg_config.get("ban_words", config.ban_words)
+            config.ban_qq = msg_config.get("ban_qq", config.ban_qq)
+            config.must_qq = msg_config.get("must_qq", config.must_qq)
 
             if config.INNER_VERSION in SpecifierSet(">=0.0.2"):
                 config.thinking_timeout = msg_config.get("thinking_timeout", config.thinking_timeout)

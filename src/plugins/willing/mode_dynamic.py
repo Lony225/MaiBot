@@ -191,6 +191,9 @@ class WillingManager:
         reply_probability = min(reply_probability, 0.75)  # 设置最大回复概率为75%
         if reply_probability < 0:
             reply_probability = 0
+            
+        if is_emoji: # 不对表情包回复
+            reply_probability = 0
 
         # 记录当前发送者ID以便后续追踪
         if sender_id:

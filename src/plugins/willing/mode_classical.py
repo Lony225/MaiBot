@@ -64,6 +64,12 @@ class WillingManager:
 
             if chat_stream.group_info.group_id in config.talk_frequency_down_groups:
                 reply_probability = reply_probability / config.down_frequency_rate
+                
+        if is_emoji: # 不对表情包回复
+            reply_probability = 0
+            
+        if not chat_stream.group_info and not is_emoji and current_willing < 1.0:
+            reply_probability = 1
 
         return reply_probability
 

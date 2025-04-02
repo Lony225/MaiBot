@@ -82,6 +82,10 @@ class ChatBot:
         messageinfo = message.message_info
 
         # 消息过滤，涉及到config有待更新
+        
+        if userinfo.user_nickname in global_config.ban_qq:
+            logger.info(f"[过滤QQ] {userinfo.user_nickname}的消息")
+            return
 
         # 创建聊天流
         chat = await chat_manager.get_or_create_stream(

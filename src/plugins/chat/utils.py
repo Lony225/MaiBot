@@ -352,9 +352,9 @@ def random_remove_punctuation(text: str) -> str:
 
 def process_llm_response(text: str) -> List[str]:
     # processed_response = process_text_with_typos(content)
-    if len(text) > 100:
-        logger.warning(f"回复过长 ({len(text)} 字符)，返回默认回复")
-        return ["懒得说"]
+    # if len(text) > 100:
+    #     logger.warning(f"回复过长 ({len(text)} 字符)，返回默认回复")
+    #     return ["懒得说"]
     # 处理长消息
     typo_generator = ChineseTypoGenerator(
         error_rate=global_config.chinese_typo_error_rate,
@@ -374,9 +374,9 @@ def process_llm_response(text: str) -> List[str]:
             sentences.append(sentence)
     # 检查分割后的消息数量是否过多（超过3条）
 
-    if len(sentences) > 3:
-        logger.warning(f"分割后消息数量过多 ({len(sentences)} 条)，返回默认回复")
-        return [f"{global_config.BOT_NICKNAME}不知道哦"]
+    # if len(sentences) > 3:
+    #     logger.warning(f"分割后消息数量过多 ({len(sentences)} 条)，返回默认回复")
+    #     return [f"{global_config.BOT_NICKNAME}不知道哦"]
 
     return sentences
 
