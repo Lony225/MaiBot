@@ -48,7 +48,7 @@ class BotConfig:
     ban_words = set()
     ban_qq = set()
     ban_msgs_regex = set()
-    must_qq = set()
+    mvp_qq = dict()
 
     max_response_length: int = 1024  # 最大回复长度
 
@@ -289,7 +289,7 @@ class BotConfig:
             config.emoji_chance = msg_config.get("emoji_chance", config.emoji_chance)
             config.ban_words = msg_config.get("ban_words", config.ban_words)
             config.ban_qq = msg_config.get("ban_qq", config.ban_qq)
-            config.must_qq = msg_config.get("must_qq", config.must_qq)
+            config.mvp_qq = msg_config.get("mvp_qq", config.mvp_qq)
 
             if config.INNER_VERSION in SpecifierSet(">=0.0.2"):
                 config.thinking_timeout = msg_config.get("thinking_timeout", config.thinking_timeout)

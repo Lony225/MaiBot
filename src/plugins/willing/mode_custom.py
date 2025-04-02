@@ -67,8 +67,8 @@ class WillingManager:
             if chat_stream.group_info.group_id in config.talk_frequency_down_groups:
                 reply_probability = reply_probability / config.down_frequency_rate
 
-            if sender_id in config.must_qq:
-                reply_probability = 0.8
+            if sender_id in config.mvp_qq.keys():
+                reply_probability = config.mvp_qq[sender_id]
     
         if is_emoji: # 不对表情包回复
             reply_probability = 0
