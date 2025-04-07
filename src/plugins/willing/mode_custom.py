@@ -41,15 +41,20 @@ class WillingManager:
         chat_id = chat_stream.stream_id
         current_willing = self.chat_reply_willing.get(chat_id, 0)
 
+        interested_rate = interested_rate * config.response_interested_rate_amplifier
+
+        if interested_rate > 0.5:
+            current_willing += interested_rate - 0.5
+
         if topic and current_willing < 1:
             current_willing += 0.2
         elif topic:
             current_willing += 0.05
 
-        # if is_mentioned_bot and current_willing < 1.0:
-        #     current_willing += 0.9
-        # elif is_mentioned_bot:
-        #     current_willing += 0.05
+        if is_mentioned_bot and current_willing < 1.0:
+            current_willing += 0.9
+        elif is_mentioned_bot:
+            current_willing += 0.05
 
         if is_emoji:
             current_willing *= 0.2
